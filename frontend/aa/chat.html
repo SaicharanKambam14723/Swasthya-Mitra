@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Swasthya Mitra - AI Assistant</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 h-screen flex flex-col">
+
+  <!-- NAVBAR -->
+  <header class="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+    <h1 class="text-4xl font-semibold text-blue-600 tracking-tight">Swasthya Mitra</h1>
+    <button class="text-2xl text-red-500 hover:text-red-600 font-medium">Logout</button>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white border-r p-5 hidden md:block">
+      <nav class="space-y-3 text-[20px]">
+        <div class="px-4 py-2.5 rounded-lg bg-blue-100 text-blue-600 font-medium">AI Assistant</div>
+        <div class="px-4 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer">Doctors</div>
+        <div class="px-4 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer">Appointments</div>
+        <div class="px-4 py-2.5 rounded-lg hover:bg-gray-100 cursor-pointer">Records</div>
+      </nav>
+    </aside>
+
+    <!-- CHAT AREA -->
+    <main class="flex-1 flex flex-col">
+
+      <!-- HEADER -->
+      <div class="p-5 bg-white border-b">
+        <h2 class="font-semibold text-lg text-gray-800">AI Health Assistant</h2>
+        <p class="text-sm text-gray-500 mt-1">I’ll ask a few questions to understand better</p>
+      </div>
+
+      <!-- CHAT -->
+      <div class="flex-1 overflow-y-auto p-8 space-y-6">
+
+        <!-- USER -->
+        <div class="flex justify-end">
+          <div class="bg-blue-600 text-white px-5 py-3 rounded-2xl text-[20px] max-w-md shadow">
+            Hi, I’m not feeling well since yesterday.
+          </div>
+        </div>
+
+        <!-- BOT -->
+        <div class="flex justify-start">
+          <div class="bg-white shadow-sm border px-5 py-3 rounded-2xl text-[20px] max-w-md">
+            Sorry to hear that. Can you tell me what you're experiencing?
+          </div>
+        </div>
+
+        <!-- USER -->
+        <div class="flex justify-end">
+          <div class="bg-blue-600 text-white px-5 py-3 rounded-2xl text-[20px] max-w-md shadow">
+            I have fever and headache.
+          </div>
+        </div>
+
+        <!-- BOT -->
+        <div class="flex justify-start">
+          <div class="bg-white shadow-sm border px-5 py-3 rounded-2xl text-[20px] max-w-md">
+            Got it 👍 Is the fever high or mild? And are you experiencing body pain or fatigue? Also, any sore throat, cold, or cough?
+          </div>
+        </div>
+
+        <!-- USER -->
+        <div class="flex justify-end">
+          <div class="bg-blue-600 text-white px-5 py-3 rounded-2xl text-[20px] max-w-md shadow">
+            Mild fever but yes, I feel tired and body pain is there. Slight sore throat, no cough.
+          </div>
+        </div>
+
+        <!-- ANALYZING -->
+        <div class="flex justify-start">
+          <div class="bg-gray-100 text-gray-500 px-4 py-2 rounded-xl text-sm italic">
+            Analyzing symptoms...
+          </div>
+        </div>
+
+        <!-- FINAL RESPONSE -->
+        <div class="flex justify-start">
+          <div class="bg-white shadow-md border px-5 py-5 rounded-2xl max-w-md space-y-4 text-[20px]">
+
+            <p>
+              Based on your symptoms, it seems like a <strong>mild viral infection (flu)</strong>.
+            </p>
+
+            <!-- CONDITION -->
+            <div class="bg-blue-50 p-3 rounded-lg text-sm border border-blue-100">
+              <strong>🩺 Condition:</strong> Viral Fever / Flu
+            </div>
+
+            <!-- SEVERITY -->
+            <div class="bg-green-50 p-3 rounded-lg text-sm border border-green-100">
+              <strong>📊 Severity:</strong> Mild — manageable at home
+            </div>
+
+            <!-- MEDICINE -->
+            <div class="bg-gray-50 p-3 rounded-lg text-sm border">
+              <strong>💊 Suggested Care:</strong>
+              <ul class="list-disc ml-4 mt-1">
+                <li>Paracetamol (for fever)</li>
+                <li>Stay hydrated</li>
+                <li>Rest properly</li>
+              </ul>
+            </div>
+
+            <!-- AYURVEDA -->
+            <div class="bg-yellow-50 p-3 rounded-lg text-sm border border-yellow-100">
+              <strong>🌿 Ayurvedic:</strong>
+              <ul class="list-disc ml-4 mt-1">
+                <li>Tulsi tea</li>
+                <li>Ginger decoction</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CONSULT BLOCK -->
+        <div class="flex justify-start">
+          <div class="bg-gradient-to-r from-blue-50 to-purple-50 border shadow-sm px-5 py-5 rounded-2xl max-w-md space-y-4">
+
+            <p class="font-semibold text-gray-800 text-[22px]">
+              Do you want to consult a doctor for this?
+            </p>
+
+            <p class="text-sm text-gray-600">
+              Recommended: <span class="font-medium text-blue-600">General Physician</span>
+            </p>
+
+            <div class="flex gap-3">
+              <button class="flex-1 bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition font-medium">
+                Yes, show doctors
+              </button>
+              <button class="flex-1 border py-2.5 rounded-lg hover:bg-gray-50 transition font-medium">
+                Continue self-care
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INPUT -->
+      <div class="p-4 bg-white border-t flex gap-3 items-center">
+        <input
+          class="flex-1 p-3.5 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-[20px]"
+          placeholder="Describe your symptoms..."
+        />
+        <button class="bg-blue-600 text-white px-6 py-2.5 rounded-xl hover:bg-blue-700 transition font-medium">
+          Send
+        </button>
+      </div>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

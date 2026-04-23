@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Appointment - Swasthya Mitra</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- NAVBAR -->
+  <header class="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-semibold text-blue-600">Swasthya Mitra</h1>
+    <button class="text-base text-red-500 hover:text-red-600 font-medium">Logout</button>
+  </header>
+
+  <div class="max-w-6xl mx-auto p-8 space-y-8">
+
+    <!-- TITLE -->
+    <h2 class="text-2xl font-semibold text-gray-800">
+      Select a Doctor
+    </h2>
+
+    <!-- DOCTOR GRID -->
+    <div class="grid grid-cols-2 gap-6">
+
+      <!-- DOCTOR 1 -->
+      <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition cursor-pointer border border-blue-200">
+        <h3 class="text-lg font-semibold">Dr. Rajesh Sharma</h3>
+        <p class="text-gray-500">General Physician</p>
+        <p class="text-sm text-gray-400 mt-1">8 yrs • Apollo Hospital</p>
+
+        <div class="mt-4 flex justify-between items-center">
+          <span class="text-green-600 text-sm font-medium">Available</span>
+          <span class="text-sm text-gray-500">₹500</span>
+        </div>
+      </div>
+
+      <!-- DOCTOR 2 -->
+      <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition cursor-pointer">
+        <h3 class="text-lg font-semibold">Dr. Priya Mehta</h3>
+        <p class="text-gray-500">General Physician</p>
+        <p class="text-sm text-gray-400 mt-1">6 yrs • Fortis Hospital</p>
+
+        <div class="mt-4 flex justify-between items-center">
+          <span class="text-green-600 text-sm font-medium">Available</span>
+          <span class="text-sm text-gray-500">₹450</span>
+        </div>
+      </div>
+
+      <!-- DOCTOR 3 (BOTTOM CENTER) -->
+      <div class="col-span-2 flex justify-center">
+        <div class="bg-white rounded-2xl shadow-md p-6 w-[50%] hover:shadow-lg transition cursor-pointer">
+          <h3 class="text-lg font-semibold">Dr. Anil Verma</h3>
+          <p class="text-gray-500">General Physician</p>
+          <p class="text-sm text-gray-400 mt-1">10 yrs • Max Hospital</p>
+
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-green-600 text-sm font-medium">Available</span>
+            <span class="text-sm text-gray-500">₹600</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOOKING SECTION -->
+    <div class="bg-white rounded-2xl shadow-md p-6 space-y-6">
+
+      <h3 class="text-lg font-semibold">Book Appointment</h3>
+
+      <!-- DATE -->
+      <div>
+        <p class="text-gray-600 mb-2">Select Date</p>
+        <div class="flex gap-3 flex-wrap">
+          <button class="px-4 py-2 rounded-lg bg-blue-600 text-white">Today</button>
+          <button class="px-4 py-2 rounded-lg border">Tomorrow</button>
+          <button class="px-4 py-2 rounded-lg border">26 Apr</button>
+        </div>
+      </div>
+
+      <!-- SLOTS -->
+      <div>
+        <p class="text-gray-600 mb-2">Time Slots</p>
+        <div class="grid grid-cols-4 gap-3">
+          <button class="py-3 rounded-lg border hover:bg-blue-50">10:00 AM</button>
+          <button class="py-3 rounded-lg border hover:bg-blue-50">10:30 AM</button>
+          <button class="py-3 rounded-lg border hover:bg-blue-50">11:00 AM</button>
+          <button class="py-3 rounded-lg border hover:bg-blue-50">11:30 AM</button>
+        </div>
+      </div>
+
+      <!-- CONFIRM -->
+      <div class="flex justify-between items-center pt-4">
+        <p class="text-gray-600">Selected: <span class="font-medium">Today • 11:00 AM</span></p>
+
+        <button class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700">
+          Confirm Booking
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

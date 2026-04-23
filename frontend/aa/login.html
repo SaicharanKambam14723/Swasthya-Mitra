@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Swasthya Mitra - Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-100 flex items-center justify-center">
+
+  <!-- CONTAINER -->
+  <div class="w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden grid grid-cols-2">
+
+    <!-- LEFT SIDE (BRANDING) -->
+    <div class="bg-gradient-to-br from-blue-600 to-purple-600 text-white p-10 flex flex-col justify-center">
+      <h1 class="text-3xl font-bold mb-4">Swasthya Mitra</h1>
+      <p class="text-lg opacity-90 mb-6">
+        Your AI-powered healthcare companion
+      </p>
+
+      <ul class="space-y-3 text-sm opacity-90">
+        <li>✔ Smart symptom analysis</li>
+        <li>✔ Doctor recommendations</li>
+        <li>✔ Ayurvedic + Allopathic insights</li>
+        <li>✔ Easy appointment booking</li>
+      </ul>
+    </div>
+
+    <!-- RIGHT SIDE (FORM) -->
+    <div class="p-10 flex flex-col justify-center">
+
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">
+        Welcome Back 👋
+      </h2>
+
+      <!-- FORM -->
+      <form class="space-y-5">
+
+        <div>
+          <label class="text-sm text-gray-600">Email</label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label class="text-sm text-gray-600">Password</label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            class="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div class="flex justify-between text-sm text-gray-500">
+          <span></span>
+          <a href="#" class="hover:text-blue-600">Forgot password?</a>
+        </div>
+
+        <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+          Login
+        </button>
+
+      </form>
+
+      <!-- SIGNUP -->
+      <p class="text-sm text-gray-500 mt-6 text-center">
+        Don’t have an account?
+        <a href="#" class="text-blue-600 font-medium">Sign up</a>
+      </p>
+
+      <!-- DIVIDER -->
+      <div class="flex items-center my-6">
+        <div class="flex-1 h-px bg-gray-200"></div>
+        <span class="px-3 text-sm text-gray-400">or</span>
+        <div class="flex-1 h-px bg-gray-200"></div>
+      </div>
+
+      <!-- GOOGLE BUTTON -->
+      <button class="w-full border py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="20" />
+        Continue with Google
+      </button>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
