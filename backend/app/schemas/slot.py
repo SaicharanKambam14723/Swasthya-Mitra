@@ -10,6 +10,13 @@ class SlotResponse(BaseModel):
     id: int
     date: date
     time: time
+    status: str
 
     class Config:
         from_attributes = True
+
+class SlotGenerate(BaseModel):
+    date: date
+    start_time: time
+    end_time: time
+    interval: int
