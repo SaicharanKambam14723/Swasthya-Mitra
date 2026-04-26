@@ -7,11 +7,10 @@ class Doctor(Base):
     __tablename__ = "doctors"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, unique=True)
 
     specialization = Column(String, nullable=False)
     experience = Column(Integer, nullable=False)
-    hospital_name = Column(String, nullable=False)
 
     # 🔥 RELATIONSHIPS
     appointments = relationship("Appointment", back_populates="doctor")

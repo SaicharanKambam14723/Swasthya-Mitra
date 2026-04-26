@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from app.core.security import hash_password
 
 from app.db.database import SessionLocal
 from app.models.user import User
@@ -20,6 +21,12 @@ def get_db():
 def register(user: UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.email == user.email).first()
 
+    if len(user.password) < 6:
+        raise HTTPException(
+            status_code=400,
+            detail="Password must be at least 6 characters"
+        )
+
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
@@ -38,7 +45,11 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
         db.rollback()
         raise HTTPException(status_code=400, detail="Email already exists")
 
-    return {"message": "User registered successfully"}
+    return {
+        "success": True,
+        "data": None,
+        "message": "User registered successfully"
+    }
 
 @router.post("/login")
 def login(user: UserLogin, db: Session = Depends(get_db)):
@@ -57,4 +68,11 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         }
     )
 
-    return {"access_token": token, "token_type": "bearer"}
+    return {
+        "success": True,
+        "data": {
+            "access_token": token,
+            "token_type": "bearer"
+        },
+        "message": "Login successful"
+    }

@@ -6,7 +6,7 @@ from fastapi import Query
 from app.models.slot import Slot
 from app.models.doctor import Doctor
 from app.schemas.slot import SlotCreate, SlotResponse
-from app.core.deps import get_current_user
+from app.core.deps import get_current_user, require_role
 from datetime import datetime, timedelta
 from datetime import date, time
 from app.db.database import get_db
@@ -18,17 +18,23 @@ router = APIRouter()
 def create_slot(
     data: SlotCreate,
     db: Session = Depends(get_db),
-    user=Depends(get_current_user),
+    user = Depends(require_role("doctor"))   # 🔥 FIX
 ):
-    if user.role != "doctor":
-        raise HTTPException(status_code=403, detail="Only doctors allowed")
-
     doctor = db.query(Doctor).filter(Doctor.user_id == user.id).first()
 
     if not doctor:
         raise HTTPException(status_code=404, detail="Doctor profile not found")
 
-    # prevent duplicate slot
+    # ❌ Prevent past slots
+    now = datetime.now()
+
+    if data.date < now.date():
+        raise HTTPException(status_code=400, detail="Cannot create slot in past")
+
+    if data.date == now.date() and data.time <= now.time():
+        raise HTTPException(status_code=400, detail="Time must be in future")
+
+    # ❌ Prevent duplicate slot
     existing = db.query(Slot).filter(
         Slot.doctor_id == doctor.id,
         Slot.date == data.date,
@@ -49,42 +55,40 @@ def create_slot(
     db.commit()
     db.refresh(slot)
 
-    return {"message": "Slot created"}
+    return {
+        "success": True,
+        "data": slot,
+        "message": "Slot created successfully"
+    }
 
 
-@router.get("/{doctor_id}", response_model=List[SlotResponse])
+@router.get("/{doctor_id}")
 def get_slots(
     doctor_id: int,
-    date: Optional[date] = Query(None),
     db: Session = Depends(get_db),
 ):
     now = datetime.now()
 
-    query = db.query(Slot).filter(
+    slots = db.query(Slot).filter(
         Slot.doctor_id == doctor_id,
-        Slot.status == "available"
-    )
-
-    # 📅 Filter by date if provided
-    if date:
-        query = query.filter(Slot.date == date)
-    else:
-        # 🔥 Only future slots
-        query = query.filter(
+        Slot.status == "available",
+        (
             (Slot.date > now.date()) |
             ((Slot.date == now.date()) & (Slot.time > now.time()))
         )
+    ).order_by(Slot.date, Slot.time).all()
 
-    # 🔽 Sort properly
-    slots = query.order_by(Slot.date, Slot.time).all()
-
-    return slots
+    return {
+        "success": True,
+        "data": slots,
+        "message": "Available slots fetched"
+    }
 
 @router.post("/generate")
 def generate_slots(
     data: SlotGenerate,
     db: Session = Depends(get_db),
-    user=Depends(get_current_user)
+    user=Depends(require_role("doctor"))
 ):
     if user.role != "doctor":
         raise HTTPException(status_code=403, detail="Only doctors can generate slots")
@@ -141,6 +145,30 @@ def generate_slots(
     db.commit()
 
     return {
-        "message": f"{len(slots_created)} slots created",
-        "slots": slots_created
+        "success": True,
+        "data": {
+            "slots": slots_created,
+            "count": len(slots_created)
+        },
+        "message": "Slots generated successfully"
+    }
+
+@router.get("/me")
+def get_my_slots(
+    db: Session = Depends(get_db),
+    user = Depends(require_role("doctor"))
+):
+    doctor = db.query(Doctor).filter(Doctor.user_id == user.id).first()
+
+    if not doctor:
+        raise HTTPException(status_code=404, detail="Doctor not found")
+
+    slots = db.query(Slot).filter(
+        Slot.doctor_id == doctor.id
+    ).order_by(Slot.date, Slot.time).all()
+
+    return {
+        "success": True,
+        "data": slots,
+        "message": "Doctor slots fetched"
     }

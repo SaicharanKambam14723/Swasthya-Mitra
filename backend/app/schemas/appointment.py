@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date, time
+from datetime import date, time, datetime
 
 class AppointmentCreate(BaseModel):
     slot_id: int
@@ -11,6 +11,7 @@ class AppointmentResponse(BaseModel):
     doctor_id: int
     patient_id: int
     status: str
+    created_at: datetime
 
     class Config:
         from_attributes = True
@@ -23,6 +24,7 @@ class AppointmentDetail(BaseModel):
     status: str
     date: date
     time: time
+    created_at: datetime
 
     class Config:
         from_attributes = True
@@ -34,6 +36,7 @@ class DoctorAppointmentDetail(BaseModel):
     status: str
     date: date
     time: time
+    created_at: datetime
 
     class Config:
         from_attributes = True

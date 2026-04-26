@@ -11,7 +11,13 @@ from app.models.slot import Slot
 from app.models.appointment import Appointment
 from app.api.appointments import router as appointment_router
 from app.api.slots import router as slot_router
-
+from app.models.disease import Disease
+from app.models.medicine import Medicine
+from app.api.diseases import router as disease_router
+from app.api.medicines import router as medicine_router
+from app.models.disease_medicine import DiseaseMedicine
+from app.api.disease_medicine import router as disease_medicine_router
+from app.api.medical import router as medical_router
 app = FastAPI()
 
 # Create tables
@@ -24,6 +30,14 @@ app.include_router(slot_router, prefix="/slots", tags=["Slots"])
 app.include_router(appointment_router, prefix="/appointments", tags=["Appointments"])
 
 app.include_router(doctor_router, prefix="/doctors", tags=["Doctors"])
+
+app.include_router(disease_router, prefix="/diseases", tags=["Diseases"])
+
+app.include_router(medicine_router, prefix="/medicines", tags=["Medicines"])
+
+app.include_router(disease_medicine_router, prefix="/disease-medicine", tags=["Disease-Medicine"])
+
+app.include_router(medical_router, tags=["Medical"])
 
 @app.get("/")
 def root():
